@@ -24,16 +24,18 @@ public class DFS {
         ArrayList<String> shortestPath = allPaths.peek();
         int count = 1;
         System.out.println("#### all paths ###");
-            while (!allPaths.isEmpty()) {
-                ArrayList<String> list = allPaths.poll();
-                System.out.println("\nroute " + count + ":");
-                System.out.println(list);
-                System.out.println("Stations count : "+list.size());
-                System.out.println("Total Price : "+Controller.totalPrice(list.size()));
-                System.out.println("Time : "+Controller.getTime(list.size()));
-                count++;
-            }
-        System.out.println("\nThe Shortest Path : "+ shortestPath);
+        while (!allPaths.isEmpty()) {
+            ArrayList<String> list = allPaths.poll();
+            System.out.println("\nroute " + count + ":");
+            System.out.println(list);
+            System.out.println("Direction : "+Controller.getDirection(list));
+            System.out.println("Stations count : "+list.size());
+            System.out.println("Total Price : "+Controller.totalPrice(list.size()));
+            System.out.println("Time : "+Controller.getTime(list.size()));
+            count++;
+        }
+        System.out.println("\n\n******The Shortest Path******* \n "+ shortestPath);
+        System.out.println("Direction : "+Controller.getDirection(shortestPath));
         System.out.println("Stations count : "+shortestPath.size());
         System.out.println("Total Price : "+Controller.totalPrice(shortestPath.size()));
         System.out.println("Time : "+Controller.getTime(shortestPath.size()));
