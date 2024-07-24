@@ -131,27 +131,27 @@ public class Controller
             direction.append("[").append(firstLine.get(0)).append("] Direction  ");
         }
 
-        for(String s : transtionStations)
+        for (int i = 1; i < path.size() - 1; i++)
         {
-            if(path.contains(s) && path.indexOf(s) != 0 && path.indexOf(s) != path.size()-1)
+            String currentStation = path.get(i);
+            if (transtionStations.contains(currentStation))
             {
-                if(isTransition(s,path))
+                if(isTransition(currentStation,path))
                 {
-                    ArrayList<String> lineShared = getSharedLine(s,path.get(path.indexOf(s)+1));
-                    if(!s.equals("Kit Kat"))
-                    {
-                        direction.append(", Then transtion at [").append(s).append("]  ");
-                        if (lineShared.indexOf(path.get(path.indexOf(s) + 1)) > lineShared.indexOf(s)) {
-                            direction.append("[").append(lineShared.get(lineShared.size() - 1)).append("] Direction  ");
+                    if (i + 1 < path.size()) {
+                        ArrayList<String> lineShared = getSharedLine(currentStation, path.get(path.indexOf(currentStation) + 1));
+                        if (!currentStation.equals("Kit Kat")) {
+                            direction.append(", Then transtion at [").append(currentStation).append("]  ");
+                            if (lineShared.indexOf(path.get(path.indexOf(currentStation) + 1)) > lineShared.indexOf(currentStation)) {
+                                direction.append("[").append(lineShared.get(lineShared.size() - 1)).append("] Direction  ");
+                            } else {
+                                direction.append("[").append(lineShared.get(0)).append("] Direction  ");
+                            }
                         } else {
-                            direction.append("[").append(lineShared.get(0)).append("] Direction  ");
-                        }
-                    }
-                    else
-                    {
-                        if (lineShared.indexOf(path.get(path.indexOf(s) + 1)) > lineShared.indexOf(s)) {
-                            direction.delete(direction.length()-31,direction.length());
-                            direction.append("[").append(lineShared.get(lineShared.size() - 1)).append("] Direction  ");
+                            if (lineShared.indexOf(path.get(path.indexOf(currentStation) + 1)) > lineShared.indexOf(currentStation)) {
+                                direction.delete(direction.length() - 31, direction.length());
+                                direction.append("[").append(lineShared.get(lineShared.size() - 1)).append("] Direction  ");
+                            }
                         }
                     }
                 }
